@@ -197,3 +197,11 @@ a {
       flex-wrap: wrap;
   gap: 25px;
 }
+
+.active {
+  background-color: orange;
+}
+
+.active a {
+  color: white;
+}

@@ -3,9 +3,9 @@ const BASE_URL = "https://swapi.dev/api/people/";
 
 let pagination = document.getElementById('pagination');
 let itemsList = document.getElementById('items');
+let active;
 
 document.addEventListener('DOMContentLoaded', getData);
-document.addEventListener('DOMContentLoaded', showInitialItems);
 
 pagination.addEventListener('click', showItems);
 
@@ -17,6 +17,8 @@ async function getData(url) {
     let pageItems = Math.ceil(result.count / ITEMS_ON_PAGE);
 
     createPaginationItems(pageItems);
+
+    showInitialItems();
 }
 
 function createPaginationItems(num) {
@@ -28,6 +30,7 @@ function createPaginationItems(num) {
         let li = createElementFromHTML(itemHTML);
 
         pagination.append(li);
+
     }
 }
 
@@ -41,6 +44,13 @@ function createElementFromHTML(htmlString) {
 
 async function showItems(event) {
     if (event.target.classList.contains('items__link')) {
+
+        if (active) {
+            active.classList.remove('active');
+        }
+
+        active = event.target.closest('li');
+        active.classList.add('active');
 
         url = BASE_URL + `?page=${event.target.textContent}`;
 
@@ -78,7 +88,20 @@ function createItemHTML(item) {
 
 
 async function showInitialItems(event) {
-    url = "https://swapi.dev/api/people/?page=1";
+    let location = document.location.href;
+
+    pageId = location.substr(location.indexOf('page') + 5, 1);
+
+    let url = BASE_URL + `?page=${pageId}`;
+
+    for (let li of pagination.children) {
+            console.log(li);
+            if (li.textContent == pageId) {
+                active = li;
+                console.log(active);
+                active.classList.add('active');
+            }
+    }
 
     let response = await fetch(url);
 
@@ -86,6 +109,7 @@ async function showInitialItems(event) {
 
     let items = json.results;
 
+    
     for (let i = 0; i < items.length; i++) {
         let itemHTML = createItemHTML(items[i]);
 

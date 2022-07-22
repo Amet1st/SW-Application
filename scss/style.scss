@@ -153,3 +153,10 @@ a {
     flex-wrap: wrap;
     gap: 25px;    
 }
+
+.active {
+    background-color: orange;
+    & a {
+        color: white;
+    }
+}
