@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@500&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@500&family=Oswald&family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+   height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.header {
+    background-color: aqua;
+
+    &__title {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 40px;
+
+        @media screen and (max-width: 870px) {
+            font-size: 30px;
+        }
+
+        @media screen and (max-width: 660px) {
+            font-size: 25px;
+        }
+
+        @media screen and (max-width: 570px) {
+            font-size: 20px;
+        }
+    }
+
+    &__container {
+        padding: 30px 15px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.main {
+    background-color: bisque;
+}
+
+.items {
+    background-color: bisque;
+    &__container {
+        padding: 50px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__title {
+        font-family: 'Ibarra Real Nova', serif;
+        font-size: 35px;
+        margin-bottom: 40px;
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        gap: 50px;
+        margin-bottom: 100px;
+    }
+
+    &__item {
+        font-size: 40px;
+    }
+
+    &__pagination {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__pages {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__list-item {
+        padding: 10px;
+        font-size: 30px;
+        background-color: aliceblue;
+    }
+}
+
+
+.footer {
+    background-color: red;
+    height: auto;
+
+    &__container {
+        padding: 15px 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__title {
+        font-size: 30px;
+        font-family: 'Ibarra Real Nova', serif;
+    }
+}

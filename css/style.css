@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@500&family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@500&family=Oswald&family=Press+Start+2P&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.container {
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.header {
+  background-color: aqua;
+}
+
+.header__title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 40px;
+}
+
+@media screen and (max-width: 870px) {
+  .header__title {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .header__title {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .header__title {
+    font-size: 20px;
+  }
+}
+
+.header__container {
+  padding: 30px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main {
+  background-color: bisque;
+}
+
+.items {
+  background-color: bisque;
+}
+
+.items__container {
+  padding: 50px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.items__title {
+  font-family: 'Ibarra Real Nova', serif;
+  font-size: 35px;
+  margin-bottom: 40px;
+}
+
+.items__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 50px;
+  margin-bottom: 100px;
+}
+
+.items__item {
+  font-size: 40px;
+}
+
+.items__pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.items__pages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+
+.items__list-item {
+  padding: 10px;
+  font-size: 30px;
+  background-color: aliceblue;
+}
+
+.footer {
+  background-color: red;
+  height: auto;
+}
+
+.footer__container {
+  padding: 15px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.footer__title {
+  font-size: 30px;
+  font-family: 'Ibarra Real Nova', serif;
+}
