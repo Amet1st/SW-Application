@@ -161,3 +161,27 @@ a {
   font-size: 30px;
   font-family: 'Ibarra Real Nova', serif;
 }
+
+#items li p {
+  color: aliceblue;
+  font-size: 30px;
+}
+
+#items li {
+  background-color: #d47312;
+  padding: 15px;
+  width: 40%;
+}
+
+#items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 70%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 25px;
+}
