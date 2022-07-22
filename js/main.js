@@ -106,7 +106,8 @@ async function showInitialItems(event) {
     } else {
         url = BASE_URL + "?page=1";
 
-        pagination.firstElementChild.classList.add('active');
+        active = pagination.firstElementChild;
+        active.classList.add('active');
 
     }
 
