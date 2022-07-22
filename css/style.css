@@ -162,6 +162,18 @@ a {
   font-family: 'Ibarra Real Nova', serif;
 }
 
+.footer li:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  background-color: orange;
+  -webkit-transition: all linear 0.3s;
+  transition: all linear 0.3s;
+}
+
+.footer li:hover a {
+  color: white;
+}
+
 #items li p {
   color: aliceblue;
   font-size: 30px;
@@ -170,7 +182,7 @@ a {
 #items li {
   background-color: #d47312;
   padding: 15px;
-  width: 40%;
+  width: 45%;
 }
 
 #items {
@@ -178,9 +190,9 @@ a {
   display: -ms-flexbox;
   display: flex;
   width: 70%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 25px;

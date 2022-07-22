@@ -4,10 +4,13 @@ const BASE_URL = "https://swapi.dev/api/people/";
 let pagination = document.getElementById('pagination');
 let itemsList = document.getElementById('items');
 
+document.addEventListener('DOMContentLoaded', getData);
+document.addEventListener('DOMContentLoaded', showInitialItems);
+
 pagination.addEventListener('click', showItems);
 
-async function getJSON(url) {
-    let response = await fetch(url);
+async function getData(url) {
+    let response = await fetch(BASE_URL);
 
     let result = await response.json();
 
@@ -70,8 +73,24 @@ function createItemHTML(item) {
                     <p>Birth Year: ${item.birth_year}</p>
                     <p>Gender: ${item.gender}</p>
                 </li>`
-    
     return html;
 }
 
-getJSON(BASE_URL);
+
+async function showInitialItems(event) {
+    url = "https://swapi.dev/api/people/?page=1";
+
+    let response = await fetch(url);
+
+    let json = await response.json();
+
+    let items = json.results;
+
+    for (let i = 0; i < items.length; i++) {
+        let itemHTML = createItemHTML(items[i]);
+
+        let item = createElementFromHTML(itemHTML);
+
+        itemsList.append(item);
+    }
+}
