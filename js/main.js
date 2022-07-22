@@ -90,17 +90,24 @@ function createItemHTML(item) {
 async function showInitialItems(event) {
     let location = document.location.href;
 
-    pageId = location.substr(location.indexOf('page') + 5, 1);
+    let url;
 
-    let url = BASE_URL + `?page=${pageId}`;
+    if (location.indexOf('page') != -1) {
+        pageId = location.substr(location.indexOf('page') + 5, 1);
 
-    for (let li of pagination.children) {
-            console.log(li);
+        url = BASE_URL + `?page=${pageId}`;
+
+        for (let li of pagination.children) {
             if (li.textContent == pageId) {
                 active = li;
-                console.log(active);
                 active.classList.add('active');
             }
+        }
+    } else {
+        url = BASE_URL + "?page=1";
+
+        pagination.firstElementChild.classList.add('active');
+
     }
 
     let response = await fetch(url);
@@ -108,13 +115,12 @@ async function showInitialItems(event) {
     let json = await response.json();
 
     let items = json.results;
-
     
-    for (let i = 0; i < items.length; i++) {
-        let itemHTML = createItemHTML(items[i]);
+    for (let item of items) {
+        let itemHTML = createItemHTML(item);
 
-        let item = createElementFromHTML(itemHTML);
+        let itemElement = createElementFromHTML(itemHTML);
 
-        itemsList.append(item);
+        itemsList.append(itemElement);
     }
 }
