@@ -1,24 +1,22 @@
 const ITEMS_ON_PAGE = 10;
 const BASE_URL = "https://swapi.dev/api/people/";
 
-let pagination = document.getElementById('pagination');
-let itemsList = document.getElementById('items');
+const pagination = document.getElementById('pagination');
+const itemsList = document.getElementById('items');
+
+let expandButtons;
+let hideButtons;
 let active;
 
-document.addEventListener('DOMContentLoaded', getData);
+document.addEventListener('DOMContentLoaded', showInitialItems);
 
 pagination.addEventListener('click', showItems);
 
 async function getData(url) {
-    let response = await fetch(BASE_URL);
+    let response = await fetch(url);
 
-    let result = await response.json();
+    return await response.json();
 
-    let pageItems = Math.ceil(result.count / ITEMS_ON_PAGE);
-
-    createPaginationItems(pageItems);
-
-    showInitialItems();
 }
 
 function createPaginationItems(num) {
@@ -26,20 +24,10 @@ function createPaginationItems(num) {
     for (let i = 1; i <= num; i++) {
         let itemHTML = `
             <li class="items__list-item"><a class="items__link" href="#?page=${i}">${i}</a></li>
-        `
-        let li = createElementFromHTML(itemHTML);
+        `;
 
-        pagination.append(li);
-
+        pagination.insertAdjacentHTML('beforeend', itemHTML);
     }
-}
-
-function createElementFromHTML(htmlString) {
-
-    let div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
- 
-    return div.firstChild;
 }
 
 async function showItems(event) {
@@ -52,37 +40,45 @@ async function showItems(event) {
         active = event.target.closest('li');
         active.classList.add('active');
 
-        url = BASE_URL + `?page=${event.target.textContent}`;
+        let url = BASE_URL + `?page=${event.target.textContent}`;
 
-        let response = await fetch(url);
-
-        let json = await response.json();
+        const data = await getData(url);
 
         itemsList.innerHTML = "";
 
-        let items = json.results;
+        let items = data.results;
 
-        for (let i = 0; i < items.length; i++) {
-            let itemHTML = createItemHTML(items[i]);
+        items.forEach(item => {
+            let itemHTML = createItemHTML(item);
 
-            let item = createElementFromHTML(itemHTML);
+            itemsList.insertAdjacentHTML('beforeend', itemHTML); 
+        });
 
-            itemsList.append(item);
-        }
+        expandButtons = document.querySelectorAll('.expand-toggle');
+        hideButtons = document.querySelectorAll('.hide-toggle');
     }
+
+    addButtonEvents();
 }
 
 function createItemHTML(item) {
+
+    const { name, birth_year, gender, height, mass, hair_color, skin_color, eye_color } = item;
+
     let html = `<li>
-                    <p>Name: ${item.name}</p>
-                    <p>Height: ${item.height}</p>
-                    <p>Mass: ${item.mass}</p>
-                    <p>Hair Color: ${item.hair_color}</p>
-                    <p>Skin Color: ${item.skin_color}</p>
-                    <p>Eye Color: ${item.eye_color}</p>
-                    <p>Birth Year: ${item.birth_year}</p>
-                    <p>Gender: ${item.gender}</p>
-                </li>`
+                    <p>Name: ${name}</p>
+                    <p>Birth Year: ${birth_year}</p>
+                    <p>Gender: ${gender}</p>
+                    <button class="expand-toggle toggle">Expand</button>
+                    <p class="second-data hide">Height: ${height}</p>
+                    <p class="second-data hide">Mass: ${mass}</p>
+                    <p class="second-data hide">Hair Color: ${hair_color}</p>
+                    <p class="second-data hide">Skin Color: ${skin_color}</p>
+                    <p class="second-data hide">Eye Color: ${eye_color}</p>
+                    <button class="hide hide-toggle toggle">Hide</button>
+                </li>
+                `
+                
     return html;
 }
 
@@ -91,37 +87,71 @@ async function showInitialItems(event) {
     let location = document.location.href;
 
     let url;
+    let pageID = "";
 
     if (location.indexOf('page') != -1) {
-        pageId = location.substr(location.indexOf('page') + 5, 1);
+        pageID = location.substr(location.indexOf('page') + 5, 1);
 
-        url = BASE_URL + `?page=${pageId}`;
+        url = BASE_URL + `?page=${pageID}`;
+        
+    } else {
+        url = BASE_URL + "?page=1";
+    }
 
+    const data = await getData(url);
+
+    let pageItems = Math.ceil(data.count / ITEMS_ON_PAGE);
+
+    createPaginationItems(pageItems);
+    
+    let items = data.results;
+
+    if (pageID) {
         for (let li of pagination.children) {
-            if (li.textContent == pageId) {
+            if (li.textContent == pageID) {
                 active = li;
                 active.classList.add('active');
             }
         }
     } else {
-        url = BASE_URL + "?page=1";
-
         active = pagination.firstElementChild;
         active.classList.add('active');
-
     }
 
-    let response = await fetch(url);
-
-    let json = await response.json();
-
-    let items = json.results;
-    
-    for (let item of items) {
+    items.forEach(item => {
         let itemHTML = createItemHTML(item);
 
-        let itemElement = createElementFromHTML(itemHTML);
+        itemsList.insertAdjacentHTML('beforeend', itemHTML);
+    });
 
-        itemsList.append(itemElement);
-    }
+    expandButtons = document.querySelectorAll('.expand-toggle');
+    hideButtons = document.querySelectorAll('.hide-toggle');
+    
+    addButtonEvents();
+}
+
+function addButtonEvents() {
+    expandButtons.forEach(item => {
+        item.addEventListener('click', event => {
+            const li = event.target.closest('li');
+            li.querySelectorAll('*').forEach(item => {
+                item.classList.remove('hide');
+            });
+
+            event.target.classList.add('hide');
+        });
+    });
+
+    hideButtons.forEach(item => {
+        item.addEventListener('click', event => {
+            const li = event.target.closest('li');
+            li.querySelectorAll('.second-data').forEach(item => {
+                item.classList.add('hide');
+            });
+
+            event.target.classList.add('hide');
+
+            li.querySelector('.expand-toggle').classList.remove('hide');
+        });
+    });
 }
