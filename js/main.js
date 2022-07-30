@@ -1,14 +1,10 @@
 const ITEMS_ON_PAGE = 10;
 const BASE_URL = "https://swapi.dev/api/people/";
-let example = "https://swapi.dev/api/people/?search=r&page=2";
-
 
 const pagination = document.getElementById('pagination');
 const itemsList = document.getElementById('items');
 const searchForm = document.getElementById('search');
 
-let expandButtons;
-let hideButtons;
 let active;
 let search;
 
@@ -16,7 +12,7 @@ document.addEventListener('DOMContentLoaded', showInitialItems);
 
 pagination.addEventListener('click', showItems);
 
-searchForm.addEventListener('submit', getSearchedData);
+searchForm.addEventListener('submit', showSearchedData);
 
 async function getData(url) {
     let response = await fetch(url);
@@ -48,7 +44,7 @@ function createPaginationItems(num, search) {
     }
 }
 
-async function showItems(event, search) {
+async function showItems(event) {
     if (event.target.classList.contains('items__link')) {
 
         if (active) {
@@ -58,13 +54,7 @@ async function showItems(event, search) {
         active = event.target.closest('li');
         active.classList.add('active');
 
-        let url;
-
-        if (search) {
-            url = BASE_URL + `?search=${search}&page=${event.target.textContent}`;
-        } else {
-            url = BASE_URL + `?page=${event.target.textContent}`;
-        }
+        let url = BASE_URL + `?page=${event.target.textContent}`;
 
         const data = await getData(url);
 
@@ -78,11 +68,9 @@ async function showItems(event, search) {
             itemsList.insertAdjacentHTML('beforeend', itemHTML); 
         });
 
-        expandButtons = document.querySelectorAll('.expand-toggle');
-        hideButtons = document.querySelectorAll('.hide-toggle');
+        addButtonEvents();
     }
 
-    addButtonEvents();
 }
 
 function createItemHTML(item) {
@@ -107,7 +95,7 @@ function createItemHTML(item) {
 }
 
 
-async function showInitialItems(search) {
+async function showInitialItems() {
 
     itemsList.innerHTML = "";
 
@@ -115,10 +103,6 @@ async function showInitialItems(search) {
 
     let url;
     let pageID = "";
-
-    if (search) {
-
-    }
 
     if (location.indexOf('page') != -1) {
         pageID = location.substr(location.indexOf('page') + 5, 1);
@@ -154,14 +138,15 @@ async function showInitialItems(search) {
 
         itemsList.insertAdjacentHTML('beforeend', itemHTML);
     });
-
-    expandButtons = document.querySelectorAll('.expand-toggle');
-    hideButtons = document.querySelectorAll('.hide-toggle');
     
     addButtonEvents();
 }
 
 function addButtonEvents() {
+
+    const expandButtons = document.querySelectorAll('.expand-toggle');
+    const hideButtons = document.querySelectorAll('.hide-toggle');
+
     expandButtons.forEach(item => {
         item.addEventListener('click', event => {
             const li = event.target.closest('li');
@@ -187,7 +172,7 @@ function addButtonEvents() {
     });
 }
 
-async function getSearchedData(event) {
+async function showSearchedData(event) {
 
     event.preventDefault();
 
@@ -221,15 +206,7 @@ async function getSearchedData(event) {
         });
 
         pagination.removeEventListener('click', showItems);
-        pagination.addEventListener('click', event => {
-
-            if (event.target.classList.contains('items__link')) {
-                showSerchedItems(event);
-            }
-        });
-
-        expandButtons = document.querySelectorAll('.expand-toggle');
-        hideButtons = document.querySelectorAll('.hide-toggle');
+        pagination.addEventListener('click', showSerchedItems);
 
         addButtonEvents();
 
@@ -239,30 +216,29 @@ async function getSearchedData(event) {
 
 
 async function showSerchedItems(event) {
+    if (event.target.classList.contains('items__link')) {
 
-    if (active) {
-        active.classList.remove('active');
+        if (active) {
+            active.classList.remove('active');
+        }
+
+        active = event.target.closest('li');
+        active.classList.add('active');
+
+        let url = BASE_URL + `?search=${search}&page=${event.target.textContent}`;
+
+        const data = await getData(url);
+
+        itemsList.innerHTML = "";
+
+        let items = data.results;
+
+        items.forEach(item => {
+            let itemHTML = createItemHTML(item);
+
+            itemsList.insertAdjacentHTML('beforeend', itemHTML); 
+        });
+
+        addButtonEvents();
     }
-
-    active = event.target.closest('li');
-    active.classList.add('active');
-
-    let url = BASE_URL + `?search=${search}&page=${event.target.textContent}`;
-
-    const data = await getData(url);
-
-    itemsList.innerHTML = "";
-
-    let items = data.results;
-
-    items.forEach(item => {
-        let itemHTML = createItemHTML(item);
-
-        itemsList.insertAdjacentHTML('beforeend', itemHTML); 
-    });
-
-    expandButtons = document.querySelectorAll('.expand-toggle');
-    hideButtons = document.querySelectorAll('.hide-toggle');
-
-    addButtonEvents();
 }
