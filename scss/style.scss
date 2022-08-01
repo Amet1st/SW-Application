@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@500&family=Press+Start+2P&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@500&family=Oswald&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Ibarra+Real+Nova:wght@500&family=Press+Start+2P&family=Ibarra+Real+Nova:wght@500&family=Oswald&family=Press+Start+2P&display=swap');
 
 * {
     margin: 0;
@@ -13,7 +11,8 @@ html {
 }
 
 body {
-    min-height: 100%;
+    min-height: 100vh;
+    min-width: 100vw;
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
@@ -99,10 +98,12 @@ a {
     &__form {
         margin-bottom: 40px;
         display: flex;
+        justify-content: center;
         gap: 10px;
 
         @media screen and (max-width: 400px) {
             flex-direction: column;
+            width: 80%;
         }
     }
 
@@ -198,7 +199,7 @@ a {
     width: 45%;
 
     @media screen and (max-width: 700px) {
-        width: 60%;
+        width: 70%;
     }
 }
 
