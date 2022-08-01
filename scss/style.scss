@@ -79,6 +79,10 @@ a {
         font-size: 40px;
         margin-bottom: 40px;
         color: white;
+
+        @media screen and (max-width: 700px) {
+            font-size: 30px;
+        }
     }
 
     &__content {
@@ -86,38 +90,30 @@ a {
         justify-content: space-between;
         gap: 50px;
         margin-bottom: 100px;
-    }
 
-    &__item {
-        font-size: 40px;
-    }
-
-    &__pagination {
-        display: flex;
-        justify-content: center;
-    }
-
-    &__pages {
-        display: flex;
-        gap: 10px;
-    }
-
-    &__list-item {
-        padding: 10px;
-        font-size: 30px;
-        background-color: aliceblue;
+        @media screen and (max-width: 700px) {
+            flex-direction: row;
+        }
     }
 
     &__form {
         margin-bottom: 40px;
         display: flex;
         gap: 10px;
+
+        @media screen and (max-width: 400px) {
+            flex-direction: column;
+        }
     }
 
     &__search {
         width: 300px;
         height: 40px;
         padding: 5px;
+
+        @media screen and (max-width: 400px) {
+            width: 100%;
+        }
     }
 
     &__button {
@@ -125,12 +121,21 @@ a {
         width: 100px;
         padding: 5px;
         font-size: 20px;
+
+        @media screen and (max-width: 400px) {
+            width: 100%;
+            align-self: center;
+        }
     }
     
     &__label {
         font-size: 25px;
         color: white;
         align-self: center;
+
+        @media screen and (max-width: 400px) {
+            font-size: 20px;
+        }
     }
 }
 
@@ -148,6 +153,26 @@ a {
     &__title {
         font-size: 30px;
         font-family: 'Ibarra Real Nova', serif;
+    }
+
+    &__pagination {
+        display: flex;
+        justify-content: center;
+
+        @media screen and (max-width: 700px) {
+            width: 100%;
+        }
+    }
+
+    &__pages {
+        display: flex;
+        gap: 10px;
+    }
+
+     &__list-item {
+        padding: 10px;
+        font-size: 30px;
+        background-color: aliceblue;
     }
 
     & li:hover {
@@ -171,6 +196,10 @@ a {
     background-size: cover;
     padding: 15px;
     width: 45%;
+
+    @media screen and (max-width: 700px) {
+        width: 60%;
+    }
 }
 
 #items {
@@ -178,7 +207,13 @@ a {
     width: 80%;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25px;    
+    gap: 25px;
+    
+    @media screen and (max-width: 700px) {
+        flex-direction: column;
+        align-content: center;
+        width: 100%;
+    }
 }
 
 .active {

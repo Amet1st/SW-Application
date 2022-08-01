@@ -31,11 +31,11 @@ function createPaginationItems(num, search) {
 
         if (search) {
             itemHTML = `
-            <li class="items__list-item"><a class="items__link" href="#?search=${search}&page=${i}">${i}</a></li>
+            <li class="footer__list-item"><a class="footer__link" href="#?search=${search}&page=${i}">${i}</a></li>
             `;
         } else {
             itemHTML = `
-            <li class="items__list-item"><a class="items__link" href="#?page=${i}">${i}</a></li>
+            <li class="footer__list-item"><a class="footer__link" href="#?page=${i}">${i}</a></li>
             `;
         }
         
@@ -45,7 +45,7 @@ function createPaginationItems(num, search) {
 }
 
 async function showItems(event) {
-    if (event.target.classList.contains('items__link')) {
+    if (event.target.classList.contains('footer__link')) {
 
         if (active) {
             active.classList.remove('active');
@@ -216,7 +216,7 @@ async function showSearchedData(event) {
 
 
 async function showSerchedItems(event) {
-    if (event.target.classList.contains('items__link')) {
+    if (event.target.classList.contains('footer__link')) {
 
         if (active) {
             active.classList.remove('active');

@@ -99,6 +99,12 @@ a {
   color: white;
 }
 
+@media screen and (max-width: 700px) {
+  .items__title {
+    font-size: 30px;
+  }
+}
+
 .items__content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -110,30 +116,13 @@ a {
   margin-bottom: 100px;
 }
 
-.items__item {
-  font-size: 40px;
-}
-
-.items__pagination {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.items__pages {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 10px;
-}
-
-.items__list-item {
-  padding: 10px;
-  font-size: 30px;
-  background-color: aliceblue;
+@media screen and (max-width: 700px) {
+  .items__content {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
 }
 
 .items__form {
@@ -144,10 +133,25 @@ a {
   gap: 10px;
 }
 
+@media screen and (max-width: 400px) {
+  .items__form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .items__search {
   width: 300px;
   height: 40px;
   padding: 5px;
+}
+
+@media screen and (max-width: 400px) {
+  .items__search {
+    width: 100%;
+  }
 }
 
 .items__button {
@@ -157,12 +161,27 @@ a {
   font-size: 20px;
 }
 
+@media screen and (max-width: 400px) {
+  .items__button {
+    width: 100%;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+}
+
 .items__label {
   font-size: 25px;
   color: white;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+}
+
+@media screen and (max-width: 400px) {
+  .items__label {
+    font-size: 20px;
+  }
 }
 
 .footer {
@@ -187,6 +206,34 @@ a {
 .footer__title {
   font-size: 30px;
   font-family: 'Ibarra Real Nova', serif;
+}
+
+.footer__pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+  .footer__pagination {
+    width: 100%;
+  }
+}
+
+.footer__pages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+
+.footer__list-item {
+  padding: 10px;
+  font-size: 30px;
+  background-color: aliceblue;
 }
 
 .footer li:hover {
@@ -214,6 +261,12 @@ a {
   width: 45%;
 }
 
+@media screen and (max-width: 700px) {
+  #items li {
+    width: 60%;
+  }
+}
+
 #items {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -225,6 +278,18 @@ a {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 25px;
+}
+
+@media screen and (max-width: 700px) {
+  #items {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    width: 100%;
+  }
 }
 
 .active {
